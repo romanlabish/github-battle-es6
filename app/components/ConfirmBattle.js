@@ -1,34 +1,33 @@
-var React = require('react');
-var PropTypes = React.PropTypes;
-var styles = require('../styles');
-var Link = require('react-router').Link;
-var UserDetails = require('../components/UserDetails');
-var UserDetailsWrapper = require('../components/UserDetailsWrapper');
-var MainContaier = require('../components/MainContainer');
-var Loading = require('../components/Loading');
+import React, { PropTypes } from 'react'
+import { Link } from 'react-router'
+import { space } from '../styles'
+import UserDetails from '../components/UserDetails'
+import UserDetailsWrapper from '../components/UserDetailsWrapper'
+import MainContaier from '../components/MainContainer'
+import Loading from '../components/Loading'
 
-function ConfirmBattle(props) {
+function ConfirmBattle({isLoading, playersInfo, onInitiateBattle}) {
   return (
-    props.isLoading === true
+    isLoading === true
     ? <Loading text="Waiting" speed={500}/>
     : <MainContaier>
-        <h1>Confirm Players</h1>
-        <div className="col-sm-8 col-sm-offset-2">
-          <UserDetailsWrapper header="Player One">
-            <UserDetails info={props.playersInfo[0]}/>
-          </UserDetailsWrapper>
-          <UserDetailsWrapper header="Player Two">
-            <UserDetails info={props.playersInfo[1]}/>
-          </UserDetailsWrapper>
+      <h1>Confirm Players</h1>
+      <div className="col-sm-8 col-sm-offset-2">
+        <UserDetailsWrapper header="Player One">
+          <UserDetails info={playersInfo[0]}/>
+        </UserDetailsWrapper>
+        <UserDetailsWrapper header="Player Two">
+          <UserDetails info={playersInfo[1]}/>
+        </UserDetailsWrapper>
+      </div>
+      <div className="col-sm-8 col-sm-offset-2">
+        <div className="col-sm-12" style={space}>
+          <button type="button" className="btn btn-lg btn-success" onClick={onInitiateBattle} >
+          Initiate Battle!
+          </button>
         </div>
-        <div className="col-sm-8 col-sm-offset-2">
-          <div className="col-sm-12" style={styles.space}>
-            <button type="button" className="btn btn-lg btn-success" onClick={props.onInitiateBattle} >
-              Initiate Battle!
-            </button>
-          </div>
-          <div className="col-sm-12" style={styles.space}>
-            <Link to="/playerOne">
+        <div className="col-sm-12" style={space}>
+          <Link to="/playerOne">
               <button type="button" className="btn btn-lg btn-danger">Reselect Players</button>
             </Link>
           </div>
@@ -37,10 +36,10 @@ function ConfirmBattle(props) {
   );
 }
 
-ConfirmBattle.protoTypes = {
+ConfirmBattle.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   playersInfo: PropTypes.array.isRequired,
   onInitiateBattle: PropTypes.func.isRequired
 };
 
-module.exports = ConfirmBattle;
+export default ConfirmBattle

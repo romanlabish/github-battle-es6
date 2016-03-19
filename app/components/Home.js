@@ -1,9 +1,8 @@
-var React = require('react');
-var ReactRouter = require('react-router');
-var Link = ReactRouter.Link;
-var MainContaier = require('../components/MainContainer');
+import React from 'react'
+import { Link } from 'react-router'
+import MainContaier from '../components/MainContainer'
 
-var Home = React.createClass({
+const Home = React.createClass({
   render: function() {
     return (
       <MainContaier>
@@ -17,4 +16,4 @@ var Home = React.createClass({
   }
 });
 
-module.exports = Home;
+export default Home
